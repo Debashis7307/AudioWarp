@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AudioWarp - Music Player</title>
+    <link rel="icon" href="logo_icon.jpg" type="image/jpg" sizes="360x360">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 sidebar">
+                <div class="logo-container">
+                    <i class="fas fa-music"></i>
+                    <span class="logo-text">AudioWarp</span>
+                </div>
+                <ul class="nav flex-column mt-4">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <i class="fas fa-home"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-book"></i> Your Library
+                        </a>
+                    </li>
+                    <li class="nav-item mt-4">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-plus-square"></i> Create Playlist
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-heart"></i> Liked Songs
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="playlists mt-4">
+                    <hr>
+                    <h6>PLAYLISTS</h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Workout Mix</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Chill Vibes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Focus Flow</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Road Trip</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-9 main-content">
+                <div class="header d-flex justify-content-between align-items-center">
+                    <div class="navigation-buttons">
+                        <button class="btn btn-circle me-2"><i class="fas fa-chevron-left"></i></button>
+                        <button class="btn btn-circle"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="user-profile">
+                      <i class="fa-regular fa-user"></i>
+                        <span>User</span>
+                    </div>
+                </div>
+                
+                <div class="content mt-4">
+                    <h2>Good afternoon</h2>
+                    
+                    <div class="playlist-grid mt-4">
+                        <div class="playlist-card" onclick="loadPlaylist('recent')">
+                            <div class="playlist-image">
+                                <img src="res.jpeg" alt="Recently Played">
+                            </div>
+                            <div class="playlist-info">
+                                <h5>Recently Played</h5>
+                                <p>Your recent tracks</p>
+                            </div>
+                        </div>
+                        
+                        <div class="playlist-card" onclick="loadPlaylist('top')">
+                            <div class="playlist-image">
+                                <img src="top.jpeg" alt="Top Hits">
+                            </div>
+                            <div class="playlist-info">
+                                <h5>Top Hits</h5>
+                                <p>Popular tracks</p>
+                            </div>
+                        </div>
+                        
+                        <div class="playlist-card" onclick="loadPlaylist('chill')">
+                            <div class="playlist-image">
+                                <img src="top2.jpeg" alt="Chill Vibes">
+                            </div>
+                            <div class="playlist-info">
+                                <h5>Chill Vibes</h5>
+                                <p>Relaxing music</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="songs-list mt-5">
+                        <h4>Recently Played</h4>
+                        <table class="table table-dark table-hover mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Artist</th>
+                                    <th scope="col">Album</th>
+                                    <th scope="col"><i class="far fa-clock"></i></th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="song-list">
+                                <!-- Songs will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Player Controls -->
+        <div class="player-controls">
+            <div class="row align-items-center">
+                <div class="col-md-3 now-playing">
+                    <div class="d-flex align-items-center">
+                        <img src="https://via.placeholder.com/56" alt="Now Playing" id="now-playing-img">
+                        <div class="ms-3">
+                            <div id="now-playing-title">Not Playing</div>
+                            <div class="artist-name" id="now-playing-artist">Select a song</div>
+                        </div>
+                        <button class="btn btn-link like-btn ms-3" id="like-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 player-main-controls">
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="player-buttons mb-2">
+                            <button class="btn btn-link" id="shuffle-btn">
+                                <i class="fas fa-random"></i>
+                            </button>
+                            <button class="btn btn-link" id="prev-btn">
+                                <i class="fas fa-step-backward"></i>
+                            </button>
+                            <button class="btn btn-primary btn-play-pause rounded-circle" id="play-btn">
+                                <i class="fas fa-play" id="play-icon"></i>
+                            </button>
+                            <button class="btn btn-link" id="next-btn">
+                                <i class="fas fa-step-forward"></i>
+                            </button>
+                            <button class="btn btn-link" id="repeat-btn">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                        </div>
+                        <div class="progress-container w-100">
+                            <span class="time-start" id="current-time">0:00</span>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" id="progress-bar"></div>
+                            </div>
+                            <span class="time-end" id="duration">0:00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 additional-controls">
+                    <div class="d-flex align-items-center justify-content-end">
+                        <button class="btn btn-link me-2" id="queue-btn">
+                            <i class="fas fa-list-ul"></i>
+                        </button>
+                        <button class="btn btn-link me-2" id="device-btn">
+                            <i class="fas fa-mobile-alt"></i>
+                        </button>
+                        <div class="volume-control me-3">
+                            <i class="fas fa-volume-up"></i>
+                            <input type="range" class="form-range" min="0" max="100" id="volume-slider">
+                        </div>
+                        <button class="btn btn-link" id="share-btn">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <audio id="audio-player"></audio>
+    
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
