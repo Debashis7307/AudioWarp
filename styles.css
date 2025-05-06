@@ -1,6 +1,6 @@
 :root {
-  --primary-color: #1a1a2e;
-  --secondary-color: #16213e;
+  --primary-color: #000000;
+  --secondary-color: #1650ef;
   --accent-color: #0f3460;
   --highlight-color: #00a8ff;
   --text-color: #ffffff;
@@ -8,7 +8,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(110deg, var(--primary-color), var(--secondary-color));
   color: var(--text-color);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   height: 100vh;
@@ -57,7 +57,7 @@ body {
 
 .nav-link {
   color: var(--text-secondary);
-  padding: 10px 0;
+  padding: 10px;
   border-radius: 5px;
   margin-bottom: 5px;
   transition: all 0.3s ease;
@@ -65,12 +65,12 @@ body {
 
 .nav-link:hover {
   color: var(--text-color);
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .nav-link.active {
   color: var(--text-color);
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .nav-link i {
@@ -93,7 +93,8 @@ body {
 
 /* Main Content Styles */
 .main-content {
-  background: linear-gradient(180deg, rgba(26, 26, 46, 0.8), rgba(22, 33, 62, 0.9));
+  background: #020024;
+background: linear-gradient(145deg, rgba(2, 0, 36, 1) 0%, rgb(14, 14, 67) 35%, rgb(73, 75, 75) 100%);
   padding: 20px;
   height: 100%;
   overflow-y: auto;
@@ -103,13 +104,14 @@ body {
   padding: 10px 20px;
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 10px;
+  box-shadow: #b3b3b3 0px 0px 7px 0px ;
 }
 
 .btn-circle {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
   
@@ -151,6 +153,7 @@ body {
 .playlist-card:hover {
   background-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-5px);
+  box-shadow: #b3b3b3 0px 0px 7px 0px ;
 }
 
 .playlist-image {
@@ -180,13 +183,21 @@ body {
 /* Songs List */
 .songs-list h4 {
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom:35px;
+
 }
 
 .table-dark {
+  margin-top: 20px;
   background-color: transparent;
   border-collapse: separate;
-  border-spacing: 0;
+  border-spacing: 1px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: #ffffff 0px 0px 7px 0px ;
+  transform-style: preserve-3d;
+  animation: float 3s ease-in-out infinite;
+  animation-delay: 0.5s;
 }
 
 .table-dark thead th {
@@ -212,9 +223,9 @@ body {
   vertical-align: middle;
 }
 
-.table-dark tbody tr.active {
+/* .table-dark tbody tr.active {
   background-color: rgba(0, 168, 255, 0.2);
-}
+} */
 
 /* Player Controls */
 .player-controls {
@@ -363,3 +374,28 @@ body {
   }
 }
 
+@keyframes float {
+  0%, 100% {
+      transform: translateY(0) rotateX(0deg);
+  }
+  50% {
+      transform: translateY(-5px) rotateX(5deg);
+  }
+}
+
+/* 3D effect for playlist cards */
+.playlist-card {
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
+  box-shadow: 0 10px 15x rgba(0, 0, 0, 0.2);
+}
+
+.playlist-card:hover {
+  transform: translateY(-10px) rotateX(5deg);
+  box-shadow: 0 15px 30px rgba(0, 168, 255, 0.3);
+}
+
+.now-playing-title {
+  color: #00a8ff !important;
+  font-weight: bold;
+}
